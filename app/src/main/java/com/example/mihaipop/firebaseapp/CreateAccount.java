@@ -1,49 +1,76 @@
 package com.example.mihaipop.firebaseapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
 
 public class CreateAccount extends AppCompatActivity {
+    
+
+    private TextView mUserName;
+    private TextView mPassword;
+    private Button butCreate;
+    private DatabaseReference dbUsers;
+    private FirebaseAuth mAuth;
 
 
-    String nume;
-    String prenume;
-    String user_name;
-    String password;
-    DatabaseReference databaseUsers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-        databaseUsers= FirebaseDatabase.getInstance().getReference("users");
+
+        mAuth=FirebaseAuth.getInstance();
+        butCreate= (Button)findViewById(R.id.createN);
+        mUserName= (TextView)findViewById(R.id.userN);
+        mPassword= (TextView)findViewById(R.id.passwordN);
+
+
+        butCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                create();
+                startActivity(new Intent(getApplicationContext(),UserDetails.class));
+            }
+        });
 
     }
 
+    public void create() {
 
-    public int completat() {
+        String user_name = mUserName.getText().toString();
+        String password = mPassword.getText().toString();
 
-        int ct = 0;
+        if((user_name.equals(""))&&(password.equals(""))) {
+            toast("Complet all filds");
+            return;
+        }
 
-        if (nume.isEmpty() == true)
-            ct = -1;
+        if(validPassword(password)==-1) {
+            toast("Password must have a majuscul and a numer!");
+            return;
+        }
 
-        if (prenume.isEmpty() == true)
-            ct = -1;
+        mAuth.createUserWithEmailAndPassword(user_name,password);
+        mAuth.signInWithEmailAndPassword(user_name, password);
 
-        if (user_name.isEmpty() == true)
-            ct = -1;
-
-        if (password.isEmpty() == true)
-            ct = -1;
-
-        return ct;
     }
 
     public int validPassword(String password) {
@@ -67,13 +94,42 @@ public class CreateAccount extends AppCompatActivity {
         return 0;
     }
 
+
+    public void toast(String text) {
+
+        Toast mToast= Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG);
+        mToast.show();
+    }
+
+
+
+
+    /*
+    private void showData(DataSnapshot dataSnapshot, String user_name) {
+
+        boolean singleUser=true;
+        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+            //getting data
+            DataUser User = postSnapshot.getValue(DataUser.class);
+            if(User.getUser_name().equals(user_name))
+                singleUser=false;
+        }
+
+        if(singleUser==true) {
+            String id = dbUsers.push().getKey();
+            DataUser user = new DataUser(id, user_name, password);
+            dbUsers.child(id).setValue(user);
+        }
+        else{
+            Toast myToast = Toast.makeText(getApplicationContext(),"Userul deja exista!",Toast.LENGTH_LONG);
+            myToast.show();
+        }
+
+
+    }
+
     public void createAccount(View v) {
 
-        EditText txtname = (EditText) findViewById(R.id.numeN);
-        nume = txtname.getText().toString();
-
-        EditText txtprenume = (EditText) findViewById(R.id.prenumeN);
-        prenume = txtprenume.getText().toString();
 
         EditText txtuser_name = (EditText) findViewById(R.id.userN);
         user_name = txtuser_name.getText().toString();
@@ -94,8 +150,21 @@ public class CreateAccount extends AppCompatActivity {
             return;
         }
 
-        String id = databaseUsers.push().getKey();
-        DataUser user = new DataUser(id,nume,prenume,user_name,password);
-        databaseUsers.child(id).setValue(user);
+
+        databaseUsers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot,user_name);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
     }
+    */
 }

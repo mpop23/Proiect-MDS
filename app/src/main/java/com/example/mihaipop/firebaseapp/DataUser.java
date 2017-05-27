@@ -4,70 +4,59 @@ package com.example.mihaipop.firebaseapp;
  * Created by mihaipop on 06/05/2017.
  */
 
-public class DataUser {
 
-    private String id;
-    private String name;
-    private String prenume;
-    private String user_name;
-    private String password;
+public  class DataUser {
+
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String country;
     private String privat;
 
-    public DataUser(String id, String name, String prenume, String user_name, String password) {
-        this.id = id;
-        this.name = name;
-        this.prenume = prenume;
-        this.user_name = user_name;
-        this.password = password;
-        this.privat="Nu";
-
+    public DataUser(String firstName, String lastName, String phone, String country) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.country = country;
+        privat="Nu";
     }
 
-    public String getId() {
-        return id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getPrenume() {
-        return prenume;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getUser_name() {
-        return user_name;
-    }
-
-    public String getPassword() {
-        return password;
+    public String getCountry() {
+        return country;
     }
 
     public String getPrivat() {
         return privat;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setFirstName(String firstName) {
+
+        this.firstName = firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setPrenume(String prenume) {
-        this.prenume = prenume;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
-    public void setPrivat(String privat) {
-        this.privat = privat;
-    }
 }
