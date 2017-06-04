@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 /**
  * Created by mihaipop
  */
@@ -33,10 +35,34 @@ public class QuestionActivity extends AppCompatActivity {
         butAddQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String question1= mQuestion1.getText().toString();
-                String question2= mQuestion2.getText().toString();
-                String question3= mQuestion3.getText().toString();
-                String question4= mQuestion4.getText().toString();
+                String question1= mQuestion1.getText().toString().trim();
+                String question2= mQuestion2.getText().toString().trim();
+                String question3= mQuestion3.getText().toString().trim();
+                String question4= mQuestion4.getText().toString().trim();
+
+
+                // see if the questions are empty.
+                if (!Validation.validString(question1)) {
+                    Toast.makeText(getApplicationContext(), "Intrebarea unu nu este validata.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (!Validation.validString(question2)) {
+                    Toast.makeText(getApplicationContext(), "Intrebarea doi nu este validata.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (!Validation.validString(question3)) {
+                    Toast.makeText(getApplicationContext(), "Intrebarea trei nu este validata.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (!Validation.validString(question4)) {
+                    Toast.makeText(getApplicationContext(), "Intrebarea patru nu este validata.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
 
                 mFirebase.setQuestion(question1,question2,question3,question4);
                 startActivity(new Intent(getApplicationContext(),UserAccount.class));

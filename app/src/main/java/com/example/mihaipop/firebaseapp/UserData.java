@@ -2,9 +2,10 @@ package com.example.mihaipop.firebaseapp;
 
 /**
  * Created by mihaipop on 06/05/2017.
+ * CHANGES: Changed name to a better one.
  */
 
-public  class DataUser {
+public  class UserData {
 
     private String firstName;
     private String lastName;
@@ -15,9 +16,9 @@ public  class DataUser {
     private int noFriends;
     private int noQuestion;
 
-    public DataUser(){}
+    public UserData(){}
 
-    public DataUser(String firstName, String lastName, String phone, String country) {
+    public UserData(String firstName, String lastName, String phone, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;

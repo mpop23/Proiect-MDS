@@ -4,15 +4,15 @@ package com.example.mihaipop.firebaseapp;
  * Created by mihaipop on 04/06/2017.
  */
 
-public class MyPair {
+public class Pair {
 
     private String first;
     private String last ;
 
 
-    MyPair(){}
+    Pair(){}
 
-    MyPair(String first,String last){
+    Pair(String first, String last){
 
         this.first=first;
         this.last=last;

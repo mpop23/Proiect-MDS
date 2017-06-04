@@ -25,11 +25,11 @@ public class UserDetails extends AppCompatActivity {
     private TextView mCountry;
     private DatabaseReference dbUsers;
     private FirebaseAuth mAuth;
-    private  FirebaseUser user;
+    private FirebaseUser user;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private Button butAddDetails;
+    private Button buttonAddDetails;
     private String idUser;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "UserDetails";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class UserDetails extends AppCompatActivity {
         mLastName =(TextView)findViewById(R.id.lastnameD);
         mPhone = (TextView) findViewById(R.id.phoneD);
         mCountry = (TextView) findViewById(R.id.countryD);
-        butAddDetails=(Button) findViewById(R.id.addDataD);
+        buttonAddDetails =(Button) findViewById(R.id.addDataD);
 
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -63,10 +63,10 @@ public class UserDetails extends AppCompatActivity {
             }
         };
 
-        butAddDetails.setOnClickListener(new View.OnClickListener() {
+        buttonAddDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addData();
+                addUserData();
 
             }
         });
@@ -74,23 +74,43 @@ public class UserDetails extends AppCompatActivity {
     }
 
 
-    public void addData() {
+    public void addUserData() {
 
+        String firstName = mFirstName.getText().toString().trim();
+        String lastName = mLastName.getText().toString().trim();
+        String phone = mPhone.getText().toString().trim();
+        String country = mCountry.getText().toString().trim();
 
-        String firstName=mFirstName.getText().toString();
-        String lastName=mLastName.getText().toString();
-        String phone=mPhone.getText().toString();
-        String country=mCountry.getText().toString();
+        // validate inputs and then create the UserData object to hold the data
 
-        if(!firstName.equals("")  && !lastName.equals("") && !phone.equals("")  &&!country.equals("") ){
-            DataUser userInformation = new DataUser(firstName,lastName,phone,country);
-            dbUsers.child(idUser).setValue(userInformation);
-            startActivity(new Intent(getApplicationContext(),QuestionActivity.class));
+        // validate first name
+        if (firstName.length() == 0 || !firstName.toLowerCase().matches("[a-z][a-z]{2,}")) {
+            Toast.makeText(getApplicationContext(),"Numele este invalid.",Toast.LENGTH_LONG).show();
+            return;
         }
-        else{
-            Toast myToast = Toast.makeText(getApplicationContext(),"Completati toate campurile",Toast.LENGTH_LONG);
-            myToast.show();
+
+        // validate last name
+        if (lastName.length() == 0 || !lastName.toLowerCase().matches("[a-z][a-z]{2,}")) {
+            Toast.makeText(getApplicationContext(),"Prenumele este invalid.",Toast.LENGTH_LONG).show();
+            return;
         }
+
+        // validate phone
+        if (phone.length() == 0 || !phone.matches("[0-9][0-9]{9,}")) {
+            Toast.makeText(getApplicationContext(),"Numarul de telefon este invalid.",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // validate country
+        if (country.length() == 0 || !country.toLowerCase().matches("[a-z][a-z]{2,}")) {
+            Toast.makeText(getApplicationContext(),"Tara este invalida.",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+        UserData userInformation = new UserData(firstName,lastName,phone,country);
+        dbUsers.child(idUser).setValue(userInformation);
+        startActivity(new Intent(getApplicationContext(),QuestionActivity.class));
     }
 
     @Override

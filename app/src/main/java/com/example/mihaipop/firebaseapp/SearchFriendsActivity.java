@@ -1,10 +1,9 @@
 package com.example.mihaipop.firebaseapp;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,7 +12,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by alinacucu on 03/06/2017.
@@ -24,9 +22,11 @@ public class SearchFriendsActivity extends android.app.Activity {
     private ArrayAdapter<String> adapter;
     private ListView lv;                                            // List view
     private EditText inputSearch;                                   // Search EditText
-    private ArrayList<MyPair> users;
+    private ArrayList<Pair> users;
     private ArrayList<String> q;
     private Firebase mFirebase;
+
+    int i = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,8 @@ public class SearchFriendsActivity extends android.app.Activity {
         inputSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Log.d("search","Cauta prieteni " + ++i);
 
                 q.clear();
                 String name = inputSearch.getText().toString();

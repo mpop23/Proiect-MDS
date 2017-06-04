@@ -16,7 +16,6 @@ public class AccountInfoActivity extends AppCompatActivity {
 
 
     private Firebase mFirebase;
-    private Validation mValidation;
     private TextView firstname;
     private TextView lastname;
     private TextView country;
@@ -29,7 +28,6 @@ public class AccountInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_info);
         mFirebase= new Firebase(getApplicationContext());
-        mValidation= new Validation();
         firstname= (TextView)findViewById(R.id.infoFirstname);
         lastname= (TextView)findViewById(R.id.infoLastname);
         country= (TextView)findViewById(R.id.infoCountry);
@@ -42,11 +40,11 @@ public class AccountInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 description=(TextView)findViewById(R.id.changeDescription);
                 String changeDescription= description.getText().toString();
-                if(mValidation.validString(changeDescription)) {
-                    mFirebase.changeDescription(changeDescription);
-                    toast("Description has been changed");
-                }
 
+                if(Validation.validString(changeDescription)) {
+                    mFirebase.changeDescription(changeDescription);
+                    Util.showMessage(getApplicationContext(),"Description has been changed");
+                }
             }
         });
 
@@ -55,22 +53,14 @@ public class AccountInfoActivity extends AppCompatActivity {
 
         privat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked==false){
-                    mFirebase.setPrivat("Nu");
-                }
-                else{
-                    mFirebase.setPrivat("Da");
-                }
-
+            if(isChecked==false){
+                mFirebase.setPrivat("Nu");
+            }
+            else{
+                mFirebase.setPrivat("Da");
+            }
             }
         });
-    }
-
-
-    public void toast(String text){
-
-        Toast mToast =Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG);
-        mToast.show();
     }
 
 }

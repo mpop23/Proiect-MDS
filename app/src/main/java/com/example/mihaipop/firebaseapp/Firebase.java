@@ -31,7 +31,9 @@ public class Firebase extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String idUser;
     private Context context;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "Firebase";
+
+
 
 
     Firebase(Context context) {
@@ -93,14 +95,13 @@ public class Firebase extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
     }
 
 
-    public void  snapShot(final ArrayList<MyPair> users,final String name) {
+    public void  snapShot(final ArrayList<Pair> users, final String name) {
 
 
 
@@ -126,12 +127,12 @@ public class Firebase extends AppCompatActivity {
         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
             //get data
             String id=postSnapshot.getKey();
-            DataUser User= new DataUser();
+            UserData User= new UserData();
 
             if(id.equals(idUser)) {
-                User.setDescription(postSnapshot.getValue(DataUser.class).getDescription());
-                User.setNoFriends(postSnapshot.getValue(DataUser.class).getNoFriends());
-                User.setNoQuestion(postSnapshot.getValue(DataUser.class).getNoQuestion());
+                User.setDescription(postSnapshot.getValue(UserData.class).getDescription());
+                User.setNoFriends(postSnapshot.getValue(UserData.class).getNoFriends());
+                User.setNoQuestion(postSnapshot.getValue(UserData.class).getNoQuestion());
                 description.setText(User.getDescription());
                 noFriends.setText(""+User.getNoFriends());
                 noQuestion.setText((""+User.getNoQuestion()));
@@ -167,11 +168,11 @@ public class Firebase extends AppCompatActivity {
 
             if(id.equals(idUser)) {
 
-                firstname.setText("First Name: "+postSnapshot.getValue(DataUser.class).getFirstName());
-                lastname.setText("Last Name: "+postSnapshot.getValue(DataUser.class).getLastName());
-                country.setText("Country:"+postSnapshot.getValue(DataUser.class).getCountry());
-                phone.setText("Phone: "+postSnapshot.getValue(DataUser.class).getPhone());
-                String check=postSnapshot.getValue(DataUser.class).getPrivat();
+                firstname.setText("First Name: "+postSnapshot.getValue(UserData.class).getFirstName());
+                lastname.setText("Last Name: "+postSnapshot.getValue(UserData.class).getLastName());
+                country.setText("Country:"+postSnapshot.getValue(UserData.class).getCountry());
+                phone.setText("Phone: "+postSnapshot.getValue(UserData.class).getPhone());
+                String check=postSnapshot.getValue(UserData.class).getPrivat();
 
                 if(check.equals("Da"))
                     privat.setChecked(true);
@@ -182,23 +183,23 @@ public class Firebase extends AppCompatActivity {
         }
     }
 
-    public void getListUsers(DataSnapshot dataSnapshot,ArrayList<MyPair> users,String name){
+    public void getListUsers(DataSnapshot dataSnapshot, ArrayList<Pair> users, String name){
         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
             //get data
             String id=postSnapshot.getKey();
-            DataUser User= new DataUser();
+            UserData User= new UserData();
 
             if(!id.equals(idUser)) {
 
                 String name1="";
                 String name2="";
-                name1+=postSnapshot.getValue(DataUser.class).getFirstName()+" ";
-                name1+=postSnapshot.getValue(DataUser.class).getLastName();
-                name2+=postSnapshot.getValue(DataUser.class).getLastName()+" ";
-                name2+=postSnapshot.getValue(DataUser.class).getFirstName();
+                name1+=postSnapshot.getValue(UserData.class).getFirstName()+" ";
+                name1+=postSnapshot.getValue(UserData.class).getLastName();
+                name2+=postSnapshot.getValue(UserData.class).getLastName()+" ";
+                name2+=postSnapshot.getValue(UserData.class).getFirstName();
 
                 if((name.equals(name1)) || (name.equals(name2))){
-                    MyPair myPair= new MyPair(id,name);
+                    Pair myPair= new Pair(id,name);
                     users.add(myPair);
                 }
             }
@@ -232,7 +233,7 @@ public class Firebase extends AppCompatActivity {
 
 
     /*
-    public void  details(DataUser userInformation){
+    public void  details(UserData userInformation){
 
         dbUsers= FirebaseDatabase.getInstance().getReference("users");
         dbUsers.child(idUser).setValue(userInformation);

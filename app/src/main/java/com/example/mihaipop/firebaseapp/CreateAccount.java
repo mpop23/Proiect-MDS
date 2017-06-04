@@ -18,7 +18,6 @@ public class CreateAccount extends AppCompatActivity {
     private TextView mUserName;
     private TextView mPassword;
     private Button butCreate;
-    private Validation myValidation;
     private Firebase myFirebase;
 
     @Override
@@ -31,7 +30,6 @@ public class CreateAccount extends AppCompatActivity {
         butCreate= (Button)findViewById(R.id.createN);
         mUserName= (TextView)findViewById(R.id.userN);
         mPassword= (TextView)findViewById(R.id.passwordN);
-        myValidation= new Validation();
         myFirebase= new Firebase(getApplicationContext());
 
         butCreate.setOnClickListener(new View.OnClickListener() {
@@ -55,12 +53,12 @@ public class CreateAccount extends AppCompatActivity {
         boolean ok=true;
         boolean create=false;
 
-        if((!myValidation.validString(user_name)) || (!myValidation.validString(password))){
+        if((!Validation.validString(user_name)) || (!Validation.validString(password))){
             toast("Complet filds");
             ok=false;
         }
 
-        if(!myValidation.validPassword(password)){
+        if(!Validation.validPassword(password)){
             toast("Password mast have 6 characters , a number and a capital");
             ok=false;
         }
