@@ -24,6 +24,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * Created by mihaipop on
+ */
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -46,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         butSingIn=(Button)findViewById(R.id.login);
         butSingUp=(Button)findViewById(R.id.create);
         mAuth=FirebaseAuth.getInstance();
-
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -119,58 +122,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*
 
-    private void loginData(DataSnapshot dataSnapshot, String name,String password) {
-
-        boolean login=false;
-
-        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-            //get data
-            DataUser User = postSnapshot.getValue(DataUser.class);
-
-           if((User.getUser_name().equals(name))&&(User.getPassword().equals(password)))
-                login=true;
-        }
-
-
-        if(login==true) {
-            startActivity((new Intent(getApplicationContext(),UserAccount.class)));
-        }
-        else {
-            Toast myToast = Toast.makeText(getApplicationContext(), "User sau parola incorecta!", Toast.LENGTH_LONG);
-            myToast.show();
-        }
-
-    }
-
-    public void login(View v) {
-
-        EditText txtName = (EditText)findViewById(R.id.name);
-        name=txtName.getText().toString();
-
-        EditText txtPass = (EditText)findViewById(R.id.password);
-        password = txtPass.getText().toString();
-
-
-          databaseUsers.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                loginData(dataSnapshot,name,password);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
-    public void newAccount(View v) {
-
-        startActivity(new Intent(getApplicationContext(),CreateAccount.class));
-    }
-    */
 }

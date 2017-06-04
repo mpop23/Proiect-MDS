@@ -23,7 +23,10 @@
             android:name=".UserAccount"
             android:label="@string/title_activity_user_account"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UserDetails"></activity>
+        <activity android:name=".UserDetails" />
+        <activity android:name=".QuestionActivity" />
+        <activity android:name=".AccountInfoActivity" />
+        <activity android:name=".SearchFriendsActivity" />
     </application>
 
 </manifest>

@@ -14,9 +14,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
-
+/**
+ * Created by mihaipop
+ */
 public class UserDetails extends AppCompatActivity {
 
     private TextView mFirstName;
@@ -67,7 +67,7 @@ public class UserDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addData();
-                //startActivity(new Intent(getApplicationContext(),UserAccount.class));
+
             }
         });
 
@@ -85,11 +85,10 @@ public class UserDetails extends AppCompatActivity {
         if(!firstName.equals("")  && !lastName.equals("") && !phone.equals("")  &&!country.equals("") ){
             DataUser userInformation = new DataUser(firstName,lastName,phone,country);
             dbUsers.child(idUser).setValue(userInformation);
-            startActivity(new Intent(getApplicationContext(),UserAccount.class));
-            
+            startActivity(new Intent(getApplicationContext(),QuestionActivity.class));
         }
         else{
-            Toast myToast = Toast.makeText(getApplicationContext(),"Userul deja exista!",Toast.LENGTH_LONG);
+            Toast myToast = Toast.makeText(getApplicationContext(),"Completati toate campurile",Toast.LENGTH_LONG);
             myToast.show();
         }
     }
