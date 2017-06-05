@@ -17,9 +17,9 @@ public class FriendAccountActivity extends AppCompatActivity {
 
         myIntent = getIntent();
         myId = myIntent.getStringExtra("myId"); // will return "myId"
-        friendId= myIntent.getStringExtra("friendId"); // will return "friendId"
+        friendId = myIntent.getStringExtra("friendId"); // will return "friendId"
 
-        mFirebase= new Firebase(getApplicationContext());
+        mFirebase = new Firebase(getApplicationContext());
 
 
     }
