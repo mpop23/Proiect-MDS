@@ -168,10 +168,10 @@ public class Firebase extends AppCompatActivity {
 
             if(id.equals(idUser)) {
 
-                firstname.setText("First Name: "+postSnapshot.getValue(UserData.class).getFirstName());
-                lastname.setText("Last Name: "+postSnapshot.getValue(UserData.class).getLastName());
-                country.setText("Country:"+postSnapshot.getValue(UserData.class).getCountry());
-                phone.setText("Phone: "+postSnapshot.getValue(UserData.class).getPhone());
+                firstname.setText("Nume: "+postSnapshot.getValue(UserData.class).getFirstName());
+                lastname.setText("Prenume: "+postSnapshot.getValue(UserData.class).getLastName());
+                country.setText("Ţara: "+postSnapshot.getValue(UserData.class).getCountry());
+                phone.setText("Telefon: "+postSnapshot.getValue(UserData.class).getPhone());
                 String check=postSnapshot.getValue(UserData.class).getPrivat();
 
                 if(check.equals("Da"))

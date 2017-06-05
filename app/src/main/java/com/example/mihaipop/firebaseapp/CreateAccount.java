@@ -54,12 +54,12 @@ public class CreateAccount extends AppCompatActivity {
         boolean create=false;
 
         if((!Validation.validString(user_name)) || (!Validation.validString(password))){
-            toast("Complet filds");
+            toast("Completează toate câmpurile.");
             ok=false;
         }
 
         if(!Validation.validPassword(password)){
-            toast("Password mast have 6 characters , a number and a capital");
+            toast("Parola trebuie să conţină cel puţin 6 caractere, numere şi litere.");
             ok=false;
         }
 

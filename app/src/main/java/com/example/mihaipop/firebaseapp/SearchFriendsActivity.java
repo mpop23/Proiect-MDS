@@ -43,7 +43,7 @@ public class SearchFriendsActivity extends android.app.Activity {
             @Override
             public void onClick(View v) {
 
-                Log.d("search","Cauta prieteni " + ++i);
+                Log.d("search","Caută prieteni " + ++i);
 
                 q.clear();
                 String name = inputSearch.getText().toString();

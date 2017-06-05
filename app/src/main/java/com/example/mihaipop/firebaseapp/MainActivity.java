@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else {
-            toast("Complet all of filds");
+            toast("Completează toate câmpurile.");
         }
 
     }

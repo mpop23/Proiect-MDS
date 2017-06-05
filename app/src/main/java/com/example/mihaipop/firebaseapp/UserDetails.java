@@ -97,13 +97,13 @@ public class UserDetails extends AppCompatActivity {
 
         // validate phone
         if (phone.length() == 0 || !phone.matches("[0-9][0-9]{9,}")) {
-            Toast.makeText(getApplicationContext(),"Numarul de telefon este invalid.",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Numărul de telefon este invalid.",Toast.LENGTH_LONG).show();
             return;
         }
 
         // validate country
         if (country.length() == 0 || !country.toLowerCase().matches("[a-z][a-z]{2,}")) {
-            Toast.makeText(getApplicationContext(),"Tara este invalida.",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Ţara este invalidă.",Toast.LENGTH_LONG).show();
             return;
         }
 

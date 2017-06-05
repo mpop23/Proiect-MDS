@@ -43,22 +43,22 @@ public class QuestionActivity extends AppCompatActivity {
 
                 // see if the questions are empty.
                 if (!Validation.validString(question1)) {
-                    Toast.makeText(getApplicationContext(), "Intrebarea unu nu este validata.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Întrebarea unu nu este validată.", Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (!Validation.validString(question2)) {
-                    Toast.makeText(getApplicationContext(), "Intrebarea doi nu este validata.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Întrebarea doi nu este validată.", Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (!Validation.validString(question3)) {
-                    Toast.makeText(getApplicationContext(), "Intrebarea trei nu este validata.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Întrebarea trei nu este validată.", Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (!Validation.validString(question4)) {
-                    Toast.makeText(getApplicationContext(), "Intrebarea patru nu este validata.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Întrebarea patru nu este validată.", Toast.LENGTH_LONG).show();
                     return;
                 }
 
