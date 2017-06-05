@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 public class Firebase extends AppCompatActivity {
 
-
     private DatabaseReference dbUsers;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
@@ -33,18 +32,14 @@ public class Firebase extends AppCompatActivity {
     private Context context;
     private static final String TAG = "Firebase";
 
-
-
-
     Firebase(Context context) {
 
-        this.context=context;
+        this.context = context;
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        dbUsers= FirebaseDatabase.getInstance().getReference("users");
-        if(user!=null)
-            idUser=user.getUid();
-
+        dbUsers = FirebaseDatabase.getInstance().getReference("users");
+        if (user != null)
+            idUser = user.getUid();
     }
 
     public boolean createAcc(String user, String password) {
@@ -57,101 +52,75 @@ public class Firebase extends AppCompatActivity {
     }
 
 
-    public void  snapShot(final CheckedTextView description,final TextView noFriends,final TextView noQuestion) {
-
-
+    public void  snapShot(final CheckedTextView description, final TextView noFriends, final TextView noQuestion) {
 
         dbUsers.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void  onDataChange(DataSnapshot dataSnapshot) {
-
-                    showDecription(dataSnapshot, description, noFriends, noQuestion);
-
+                showDecription(dataSnapshot, description, noFriends, noQuestion);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
     }
 
-
-    public void  snapShot(final TextView firstname,final TextView lastname,final TextView country,final TextView phone,final Switch privat) {
-
-
+    public void  snapShot(final TextView firstname, final TextView lastname, final TextView country, final TextView phone, final Switch privat) {
 
         dbUsers.addValueEventListener(new ValueEventListener() {
 
-
             @Override
             public void  onDataChange(DataSnapshot dataSnapshot) {
-
                 getAccountInfo(dataSnapshot, firstname, lastname, country,phone,privat);
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
     }
-
 
     public void  snapShot(final ArrayList<Pair> users, final String name) {
 
-
-
         dbUsers.addValueEventListener(new ValueEventListener() {
-
 
             @Override
             public void  onDataChange(DataSnapshot dataSnapshot) {
-
-                getListUsers(dataSnapshot,users,name);
-
+                getListUsers(dataSnapshot, users, name);
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
     }
 
     public void showDecription(DataSnapshot dataSnapshot, CheckedTextView description, TextView noFriends, TextView noQuestion) {
 
         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
             //get data
-            String id=postSnapshot.getKey();
-            UserData User= new UserData();
+            String id = postSnapshot.getKey();
+            UserData User = new UserData();
 
-            if(id.equals(idUser)) {
+            if (id.equals(idUser)) {
                 User.setDescription(postSnapshot.getValue(UserData.class).getDescription());
                 User.setNoFriends(postSnapshot.getValue(UserData.class).getNoFriends());
                 User.setNoQuestion(postSnapshot.getValue(UserData.class).getNoQuestion());
                 description.setText(User.getDescription());
-                noFriends.setText(""+User.getNoFriends());
-                noQuestion.setText((""+User.getNoQuestion()));
-
+                noFriends.setText("" + User.getNoFriends());
+                noQuestion.setText(("" + User.getNoQuestion()));
             }
         }
-
     }
-
 
     public void changeDescription(String description)  {
-
         dbUsers.child(idUser).child("description").setValue(description);
-
     }
 
-    public void setQuestion(String question1,String question2,String question3,String question4){
-
-        Question question = new Question(question1,question2,question3,question4);
+    public void setQuestion(String question1, String question2, String question3, String question4){
+        Question question = new Question(question1, question2, question3, question4);
         dbUsers.child(idUser).child("question").setValue(question);
     }
 
@@ -159,58 +128,55 @@ public class Firebase extends AppCompatActivity {
         dbUsers.child(idUser).child("privat").setValue(privat);
     }
 
-    public void getAccountInfo( DataSnapshot dataSnapshot,TextView firstname, TextView lastname, TextView country, TextView phone,Switch privat){
-
+    public void getAccountInfo(DataSnapshot dataSnapshot,TextView firstname, TextView lastname, TextView country, TextView phone, Switch privat) {
 
         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
             //get data
-            String id=postSnapshot.getKey();
+            String id = postSnapshot.getKey();
 
-            if(id.equals(idUser)) {
+            if (id.equals(idUser)) {
+                firstname.setText("Nume: " + postSnapshot.getValue(UserData.class).getFirstName());
+                lastname.setText("Prenume: " + postSnapshot.getValue(UserData.class).getLastName());
+                country.setText("Ţara: " + postSnapshot.getValue(UserData.class).getCountry());
+                phone.setText("Telefon: " + postSnapshot.getValue(UserData.class).getPhone());
+                String check = postSnapshot.getValue(UserData.class).getPrivat();
 
-                firstname.setText("Nume: "+postSnapshot.getValue(UserData.class).getFirstName());
-                lastname.setText("Prenume: "+postSnapshot.getValue(UserData.class).getLastName());
-                country.setText("Ţara: "+postSnapshot.getValue(UserData.class).getCountry());
-                phone.setText("Telefon: "+postSnapshot.getValue(UserData.class).getPhone());
-                String check=postSnapshot.getValue(UserData.class).getPrivat();
-
-                if(check.equals("Da"))
+                if (check.equals("Da"))
                     privat.setChecked(true);
                 else
                     privat.setChecked(false);
-
             }
         }
     }
 
     public void getListUsers(DataSnapshot dataSnapshot, ArrayList<Pair> users, String name){
+
         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
             //get data
-            String id=postSnapshot.getKey();
-            UserData User= new UserData();
+            String id = postSnapshot.getKey();
+            UserData User = new UserData();
 
-            if(!id.equals(idUser)) {
+            if (!id.equals(idUser)) {
+                String name1 = "";
+                String name2 = "";
+                name1 += postSnapshot.getValue(UserData.class).getFirstName() + " ";
+                name1 += postSnapshot.getValue(UserData.class).getLastName();
+                name2 += postSnapshot.getValue(UserData.class).getLastName() + " ";
+                name2 += postSnapshot.getValue(UserData.class).getFirstName();
 
-                String name1="";
-                String name2="";
-                name1+=postSnapshot.getValue(UserData.class).getFirstName()+" ";
-                name1+=postSnapshot.getValue(UserData.class).getLastName();
-                name2+=postSnapshot.getValue(UserData.class).getLastName()+" ";
-                name2+=postSnapshot.getValue(UserData.class).getFirstName();
-
-                if((name.equals(name1)) || (name.equals(name2))){
-                    Pair myPair= new Pair(id,name);
+                if ((name.equals(name1)) || (name.equals(name2))){
+                    Pair myPair= new Pair(id, name);
                     users.add(myPair);
                 }
             }
         }
-
     }
 
     public void signOut() {
         // Firebase sign out
         mAuth.signOut();
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -227,10 +193,9 @@ public class Firebase extends AppCompatActivity {
 
     public void toast(String text){
 
-        Toast mToast =Toast.makeText(context,text,Toast.LENGTH_LONG);
+        Toast mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         mToast.show();
     }
-
 
     /*
     public void  details(UserData userInformation){

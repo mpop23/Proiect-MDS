@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Oracolul</string>
-    <string name="title_activity_user_account">User Account</string>
+    <string name="title_activity_user_account">Cont</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Deschide navigator</string>
+    <string name="navigation_drawer_close">Închide navigator</string>
 
     <string name="action_settings">Setari</string>
 </resources>

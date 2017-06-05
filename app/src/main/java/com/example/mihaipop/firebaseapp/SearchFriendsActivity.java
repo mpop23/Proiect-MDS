@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class SearchFriendsActivity extends android.app.Activity {
 
     private ArrayAdapter<String> adapter;
-    private ListView lv;                                            // List view
-    private EditText inputSearch;                                   // Search EditText
+    private ListView lv;                    // List view
+    private EditText inputSearch;          // Search EditText
     private ArrayList<Pair> users;
     private ArrayList<String> q;
     private Firebase mFirebase;
@@ -35,9 +35,9 @@ public class SearchFriendsActivity extends android.app.Activity {
 
         lv = (ListView) findViewById(R.id.list_view);               // Listview Data
         inputSearch = (EditText) findViewById(R.id.inputSearch);
-        mFirebase= new Firebase(getApplicationContext());
+        mFirebase = new Firebase(getApplicationContext());
         users = new ArrayList<>();
-        q=new ArrayList<>();
+        q = new ArrayList<>();
 
         inputSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,10 +47,10 @@ public class SearchFriendsActivity extends android.app.Activity {
 
                 q.clear();
                 String name = inputSearch.getText().toString();
-                mFirebase.snapShot(users,name);
+                mFirebase.snapShot(users, name);
 
 
-                for(int i=0;i<users.size();i++) {
+                for (int i = 0; i < users.size(); i++) {
                     q.add(users.get(i).getLast());
                 }
 
@@ -69,10 +69,8 @@ public class SearchFriendsActivity extends android.app.Activity {
                     }
 
                     @Override
-                    public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                                  int arg3) {
+                    public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
                         // TODO Auto-generated method stub
-
                     }
 
                     @Override
@@ -84,31 +82,23 @@ public class SearchFriendsActivity extends android.app.Activity {
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                        String s =""+ lv.getItemAtPosition(i)+" "+i;
+                        String s = "" + lv.getItemAtPosition(i) + " " + i;
                         toast(s);
                         //nuw activity!
                     }
                 });
                 users.clear();
-
             }
 
         });
-
     }
 
     public void toast(String text) {
-
-        Toast mToast= Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG);
+        Toast mToast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
         mToast.show();
     }
 
     public void newAdaptor(){
-
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, q);//Adding items to listview
-
     }
-
 }
-

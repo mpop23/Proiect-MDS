@@ -30,7 +30,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private TextView mUserName;
     private TextView mPassword;
     private Button butSingIn;
@@ -42,30 +41,30 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mUserName=(EditText)findViewById(R.id.name);
-        mPassword=(EditText)findViewById(R.id.password);
-        butSingIn=(Button)findViewById(R.id.login);
-        butSingUp=(Button)findViewById(R.id.create);
-        mAuth=FirebaseAuth.getInstance();
+        mUserName = (EditText)findViewById(R.id.name);
+        mPassword = (EditText)findViewById(R.id.password);
+        butSingIn = (Button)findViewById(R.id.login);
+        butSingUp = (Button)findViewById(R.id.create);
+        mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                user = firebaseAuth.getCurrentUser();
-                if (user!= null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    startActivity((new Intent(getApplicationContext(),UserAccount.class)));
+            user = firebaseAuth.getCurrentUser();
+            if (user!= null) {
+                // User is signed in
+                Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                startActivity((new Intent(getApplicationContext(),UserAccount.class)));
+            } else {
+                // User is signed out
+                Log.d(TAG, "onAuthStateChanged:signed_out");
+            }
 
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-
-                }
-                // ...
+            // ...
             }
         };
 
@@ -76,34 +75,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         butSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CreateAccount.class));
+                startActivity(new Intent(getApplicationContext(), CreateAccount.class));
             }
         });
-
     }
 
     public void login() {
 
-        String userName=mUserName.getText().toString();
-        String password=mPassword.getText().toString();
+        String userName = mUserName.getText().toString();
+        String password = mPassword.getText().toString();
 
-        if((!userName.equals(""))&&(!password.equals(""))) {
+        if ((!userName.equals("")) && (!password.equals(""))) {
             mAuth.signInWithEmailAndPassword(userName, password);
-
         }
         else {
             toast("Completează toate câmpurile.");
         }
-
     }
 
     public void toast(String text){
-
-        Toast mToast =Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG);
+        Toast mToast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
         mToast.show();
     }
 
@@ -120,7 +114,4 @@ public class MainActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
-
-
 }

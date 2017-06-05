@@ -35,29 +35,26 @@ public class UserDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
-        mAuth=FirebaseAuth.getInstance();
-        user=mAuth.getCurrentUser();
-        dbUsers= FirebaseDatabase.getInstance().getReference("users");
-        mFirstName =(TextView) findViewById(R.id.firstnameD);
-        mLastName =(TextView)findViewById(R.id.lastnameD);
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        dbUsers = FirebaseDatabase.getInstance().getReference("users");
+        mFirstName = (TextView) findViewById(R.id.firstnameD);
+        mLastName = (TextView)findViewById(R.id.lastnameD);
         mPhone = (TextView) findViewById(R.id.phoneD);
         mCountry = (TextView) findViewById(R.id.countryD);
-        buttonAddDetails =(Button) findViewById(R.id.addDataD);
-
+        buttonAddDetails = (Button) findViewById(R.id.addDataD);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 user = firebaseAuth.getCurrentUser();
-                if (user!= null) {
+                if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     idUser=user.getUid();
-
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-
                 }
                 // ...
             }
@@ -67,12 +64,9 @@ public class UserDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addUserData();
-
             }
         });
-
     }
-
 
     public void addUserData() {
 
@@ -85,32 +79,31 @@ public class UserDetails extends AppCompatActivity {
 
         // validate first name
         if (firstName.length() == 0 || !firstName.toLowerCase().matches("[a-z][a-z]{2,}")) {
-            Toast.makeText(getApplicationContext(),"Numele este invalid.",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Numele este invalid.", Toast.LENGTH_LONG).show();
             return;
         }
 
         // validate last name
         if (lastName.length() == 0 || !lastName.toLowerCase().matches("[a-z][a-z]{2,}")) {
-            Toast.makeText(getApplicationContext(),"Prenumele este invalid.",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Prenumele este invalid.", Toast.LENGTH_LONG).show();
             return;
         }
 
         // validate phone
         if (phone.length() == 0 || !phone.matches("[0-9][0-9]{9,}")) {
-            Toast.makeText(getApplicationContext(),"Numărul de telefon este invalid.",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Numărul de telefon este invalid.", Toast.LENGTH_LONG).show();
             return;
         }
 
         // validate country
         if (country.length() == 0 || !country.toLowerCase().matches("[a-z][a-z]{2,}")) {
-            Toast.makeText(getApplicationContext(),"Ţara este invalidă.",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Ţara este invalidă.", Toast.LENGTH_LONG).show();
             return;
         }
 
-
-        UserData userInformation = new UserData(firstName,lastName,phone,country);
+        UserData userInformation = new UserData(firstName, lastName, phone, country);
         dbUsers.child(idUser).setValue(userInformation);
-        startActivity(new Intent(getApplicationContext(),QuestionActivity.class));
+        startActivity(new Intent(getApplicationContext(), QuestionActivity.class));
     }
 
     @Override
@@ -126,5 +119,4 @@ public class UserDetails extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
 }

@@ -25,21 +25,20 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qestion);
 
-        mFirebase= new Firebase(getApplicationContext());
-        butAddQuestion=(Button)findViewById(R.id.addQuestion);
-        mQuestion1=(TextView)findViewById(R.id.question1);
-        mQuestion2=(TextView)findViewById(R.id.question2);
-        mQuestion3=(TextView)findViewById(R.id.question3);
-        mQuestion4=(TextView)findViewById(R.id.question4);
+        mFirebase = new Firebase(getApplicationContext());
+        butAddQuestion = (Button)findViewById(R.id.addQuestion);
+        mQuestion1 = (TextView)findViewById(R.id.question1);
+        mQuestion2 = (TextView)findViewById(R.id.question2);
+        mQuestion3 = (TextView)findViewById(R.id.question3);
+        mQuestion4 = (TextView)findViewById(R.id.question4);
 
         butAddQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String question1= mQuestion1.getText().toString().trim();
-                String question2= mQuestion2.getText().toString().trim();
-                String question3= mQuestion3.getText().toString().trim();
-                String question4= mQuestion4.getText().toString().trim();
-
+                String question1 = mQuestion1.getText().toString().trim();
+                String question2 = mQuestion2.getText().toString().trim();
+                String question3 = mQuestion3.getText().toString().trim();
+                String question4 = mQuestion4.getText().toString().trim();
 
                 // see if the questions are empty.
                 if (!Validation.validString(question1)) {
@@ -62,12 +61,9 @@ public class QuestionActivity extends AppCompatActivity {
                     return;
                 }
 
-
-
-                mFirebase.setQuestion(question1,question2,question3,question4);
-                startActivity(new Intent(getApplicationContext(),UserAccount.class));
+                mFirebase.setQuestion(question1, question2, question3, question4);
+                startActivity(new Intent(getApplicationContext(), UserAccount.class));
             }
         });
-
     }
 }

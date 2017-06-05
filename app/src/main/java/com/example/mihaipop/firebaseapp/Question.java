@@ -35,7 +35,9 @@ public class Question {
         this.question4 = question4;
     }
 
-    public String getQuestion1() {return question1;}
+    public String getQuestion1() {
+        return question1;
+    }
 
     public String getQuestion2() {
         return question2;
@@ -48,6 +50,4 @@ public class Question {
     public String getQuestion4() {
         return question4;
     }
-
-
 }

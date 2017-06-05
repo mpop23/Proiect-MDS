@@ -23,10 +23,10 @@ public  class UserData {
         this.lastName = lastName;
         this.phone = phone;
         this.country = country;
-        privat="Nu";
-        description="";
-        noFriends=0;
-        noQuestion=0;
+        privat = "Nu";
+        description = "";
+        noFriends = 0;
+        noQuestion = 0;
     }
 
     public String getFirstName() {
@@ -49,21 +49,34 @@ public  class UserData {
         return privat;
     }
 
-    public String getDescription(){return description;}
+    public String getDescription() {
+        return description;
+    }
 
-    public int getNoFriends(){return noFriends;}
+    public int getNoFriends() {
+        return noFriends;
+    }
 
-    public int getNoQuestion(){return noQuestion;}
+    public int getNoQuestion() {
+        return noQuestion;
+    }
 
-    public void setFirstName(String firstName) {this.firstName = firstName;}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public void setNoFriends(int noFriends){this.noFriends=noFriends;}
+    public void setNoFriends(int noFriends) {
+        this.noFriends = noFriends;
+    }
 
     public void setPrivat(String privat) {
+
         this.privat = privat;
     }
 
-    public void setNoQuestion(int noQuestion){this.noQuestion=noQuestion;}
+    public void setNoQuestion(int noQuestion) {
+        this.noQuestion = noQuestion;
+    }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;

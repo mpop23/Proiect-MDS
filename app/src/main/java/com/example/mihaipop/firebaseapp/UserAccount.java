@@ -33,7 +33,6 @@ import java.util.ArrayList;
  */
 public class UserAccount extends AppCompatActivity
 
-
     implements NavigationView.OnNavigationItemSelectedListener {
 
     private Firebase mFirebase;
@@ -42,7 +41,6 @@ public class UserAccount extends AppCompatActivity
     private TextView noFriends;
     private TextView noQuestion;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +48,11 @@ public class UserAccount extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        description =(CheckedTextView)findViewById(R.id.description);
-        noFriends=(TextView)findViewById(R.id.friends);
-        noQuestion=(TextView)findViewById(R.id.ques);
-        pPhoto=(ImageView)findViewById(R.id.profilephoto);
-        mFirebase= new Firebase(getApplicationContext());
+        description = (CheckedTextView)findViewById(R.id.description);
+        noFriends = (TextView)findViewById(R.id.friends);
+        noQuestion = (TextView)findViewById(R.id.ques);
+        pPhoto = (ImageView)findViewById(R.id.profilephoto);
+        mFirebase = new Firebase(getApplicationContext());
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -65,11 +63,8 @@ public class UserAccount extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        mFirebase.snapShot(description,noFriends,noQuestion);
-
-
+        mFirebase.snapShot(description, noFriends, noQuestion);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -97,7 +92,7 @@ public class UserAccount extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.search) {
-            startActivity(new Intent(getApplicationContext(),SearchFriendsActivity.class));
+            startActivity(new Intent(getApplicationContext(), SearchFriendsActivity.class));
             return true;
         }
 
@@ -110,11 +105,10 @@ public class UserAccount extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_slideshow) {
-
                 mFirebase.signOut();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
         } else if (id == R.id.nav_manage) {
-            startActivity(new Intent(getApplicationContext(),AccountInfoActivity.class));
+            startActivity(new Intent(getApplicationContext(), AccountInfoActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -122,12 +116,8 @@ public class UserAccount extends AppCompatActivity
         return true;
     }
 
-
     public void toast(String text){
-
-        Toast mToast =Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG);
+        Toast mToast =Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
         mToast.show();
     }
-
-
 }
