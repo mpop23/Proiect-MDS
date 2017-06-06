@@ -15,7 +15,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".CreateAccount" />
@@ -27,7 +27,14 @@
         <activity android:name=".QuestionActivity" />
         <activity android:name=".AccountInfoActivity" />
         <activity android:name=".SearchFriendsActivity" />
-        <activity android:name=".FriendAccountActivity"></activity>
+        <activity android:name=".FriendAccountActivity" />
+        <activity android:name=".WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
