@@ -42,15 +42,9 @@ public class Firebase extends AppCompatActivity {
             idUser = user.getUid();
     }
 
-    public boolean createAcc(String user, String password) {
+    public FirebaseAuth getmAuth() { return mAuth; }
 
-        mAuth.createUserWithEmailAndPassword(user,password);
-        mAuth.signInWithEmailAndPassword(user, password);
-        if (mAuth.getCurrentUser() == null)
-            return false;
-        return true;
-    }
-
+    public String getIdUser() { return idUser; }
 
     public void  snapShot(final CheckedTextView description, final TextView noFriends, final TextView noQuestion) {
 
@@ -84,7 +78,21 @@ public class Firebase extends AppCompatActivity {
 
     public void  snapShot(final ArrayList<Pair> users, final String name) {
 
-        dbUsers.addValueEventListener(new ValueEventListener() {
+        //search first name
+        dbUsers.orderByChild("firstName").startAt(name).endAt(name + "~").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void  onDataChange(DataSnapshot dataSnapshot) {
+                getListUsers(dataSnapshot, users, name);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        //search last name
+        dbUsers.orderByChild("lastName").startAt(name).endAt(name + "~").addValueEventListener(new ValueEventListener() {
 
             @Override
             public void  onDataChange(DataSnapshot dataSnapshot) {
@@ -97,6 +105,9 @@ public class Firebase extends AppCompatActivity {
         });
     }
 
+
+
+
     public void showDecription(DataSnapshot dataSnapshot, CheckedTextView description, TextView noFriends, TextView noQuestion) {
 
         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -104,7 +115,7 @@ public class Firebase extends AppCompatActivity {
             String id = postSnapshot.getKey();
             UserData User = new UserData();
 
-            if (id.equals(idUser)) {
+            if (!id.equals(idUser)) {
                 User.setDescription(postSnapshot.getValue(UserData.class).getDescription());
                 User.setNoFriends(postSnapshot.getValue(UserData.class).getNoFriends());
                 User.setNoQuestion(postSnapshot.getValue(UserData.class).getNoQuestion());
@@ -157,20 +168,15 @@ public class Firebase extends AppCompatActivity {
             UserData User = new UserData();
 
             if (!id.equals(idUser)) {
-                String name1 = "";
-                String name2 = "";
-                name1 += postSnapshot.getValue(UserData.class).getFirstName() + " ";
-                name1 += postSnapshot.getValue(UserData.class).getLastName();
-                name2 += postSnapshot.getValue(UserData.class).getLastName() + " ";
-                name2 += postSnapshot.getValue(UserData.class).getFirstName();
 
-                if ((name.equals(name1)) || (name.equals(name2))){
-                    Pair myPair= new Pair(id, name);
-                    users.add(myPair);
-                }
+                String firstname = postSnapshot.getValue(UserData.class).getFirstName();
+                String lastname = postSnapshot.getValue(UserData.class).getLastName();
+                Pair myPair= new Pair(id, firstname + " " + lastname);
+                users.add(myPair);
             }
         }
     }
+
 
     public void signOut() {
         // Firebase sign out

@@ -1,12 +1,17 @@
 package com.example.mihaipop.firebaseapp;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 /**
  * Created by mihaipop
@@ -35,16 +40,12 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                boolean createUser;
-                createUser = createAcc();
-                if (createUser == true) {
-                    startActivity(new Intent(getApplicationContext(), UserDetails.class));
-                }
+                createAcc();
             }
         });
     }
 
-    public boolean createAcc() {
+    public void createAcc() {
 
         String user_name = mUserName.getText().toString();
         String password = mPassword.getText().toString();
@@ -62,10 +63,25 @@ public class CreateAccount extends AppCompatActivity {
         }
 
         if(ok == true){
-            create = myFirebase.createAcc(user_name, password);
-        }
 
-        return create;
+            myFirebase.getmAuth().createUserWithEmailAndPassword(user_name, password)
+                    .addOnCompleteListener(CreateAccount.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+
+                                startActivity(new Intent(getApplicationContext(), UserDetails.class));
+                                finish();
+
+                            }else{
+
+                                toast( "Emailul deja exista!" );
+                            }
+
+                        }
+                    });
+            }
+
     }
 
     public void toast(String text) {

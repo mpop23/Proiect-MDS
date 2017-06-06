@@ -1,5 +1,6 @@
 package com.example.mihaipop.firebaseapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -82,9 +83,13 @@ public class SearchFriendsActivity extends android.app.Activity {
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String s = "" + lv.getItemAtPosition(i) + " " + i;
-                        toast(s);
-                        //nuw activity!
+                        String myId=mFirebase.getIdUser();
+                        String friendId=users.get(i).getFirst();
+
+                        Intent myIntent = new Intent(getApplicationContext(),FriendAccountActivity.class);
+                        myIntent.putExtra("myId",myId);
+                        myIntent.putExtra("friendId",friendId);
+                        startActivity(myIntent);
                     }
                 });
                 users.clear();

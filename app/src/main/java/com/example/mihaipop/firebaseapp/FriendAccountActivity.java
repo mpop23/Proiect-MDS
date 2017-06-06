@@ -6,10 +6,10 @@ import android.os.Bundle;
 
 public class FriendAccountActivity extends AppCompatActivity {
 
-    private Intent myIntent;
-    private String myId;
-    private String friendId;
-    private Firebase mFirebase;
+        private Intent myIntent;
+        private String myId;
+        private String friendId;
+        private Firebase mFirebase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,9 +18,5 @@ public class FriendAccountActivity extends AppCompatActivity {
         myIntent = getIntent();
         myId = myIntent.getStringExtra("myId"); // will return "myId"
         friendId = myIntent.getStringExtra("friendId"); // will return "friendId"
-
-        mFirebase = new Firebase(getApplicationContext());
-
-
     }
 }

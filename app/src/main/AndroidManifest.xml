@@ -27,6 +27,7 @@
         <activity android:name=".QuestionActivity" />
         <activity android:name=".AccountInfoActivity" />
         <activity android:name=".SearchFriendsActivity" />
+        <activity android:name=".FriendAccountActivity"></activity>
     </application>
 
 </manifest>
