@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bck"
     tools:context="com.example.mihaipop.firebaseapp.MainActivity">
 
 
@@ -37,6 +38,8 @@
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
         android:text="Logare"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -72,6 +75,8 @@
         android:id="@+id/create"
         android:layout_width="170dp"
         android:layout_height="57dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
         android:onClick="newAccount"
         android:text="Cont nou"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back"
     tools:context="com.example.mihaipop.firebaseapp.UserAccount">
 
     <android.support.design.widget.AppBarLayout
@@ -14,13 +15,17 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="match_parent"
             android:background="?attr/colorPrimary"
             android:elevation="12dp"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_user_account" />
+    <include
+        layout="@layout/content_user_account"
+        android:layout_width="match_parent"
+        android:layout_height="618dp"
+        android:visibility="visible" />
 
 </android.support.design.widget.CoordinatorLayout>

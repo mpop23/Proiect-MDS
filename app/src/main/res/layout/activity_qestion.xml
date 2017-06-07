@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pagee"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context="com.example.mihaipop.firebaseapp.QuestionActivity">
@@ -20,11 +21,11 @@
             android:layout_height="36dp"
             android:text="Întrebarea 1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.168"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.098"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.098" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.168" />
 
         <EditText
             android:id="@+id/question1"
@@ -32,8 +33,8 @@
             android:layout_height="wrap_content"
             android:height="20dp"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="Un cuvânt de început…"
+            android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.847"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -55,11 +56,11 @@
             android:layout_height="36dp"
             android:text="Întrebarea 2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.309"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.098"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.098" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.309" />
 
 
         <EditText
@@ -67,14 +68,14 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="Descrie-te în câteva cuvinte!"
+            android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.309"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.847"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.847" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.309" />
     </LinearLayout>
 
     <!-- Third question -->
@@ -100,14 +101,14 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="Un cuvânt de încheiere?"
+            android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.45"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.847"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.847" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45" />
 
     </LinearLayout>
 
@@ -115,8 +116,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="80dp">
+        android:layout_marginBottom="80dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView15"
@@ -136,24 +137,23 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="Îmi puteţi lăsa o mică amintire?"
+            android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.616"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.847"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.847" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.616" />
     </LinearLayout>
-
 
 
     <!-- Add button to save the questions -->
 
     <Button
         android:id="@+id/addQuestion"
-        android:layout_width="89dp"
-        android:layout_height="52dp"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
         android:text="Adaugă"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.831"
