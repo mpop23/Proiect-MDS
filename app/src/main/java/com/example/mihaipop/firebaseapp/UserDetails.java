@@ -19,16 +19,16 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class UserDetails extends AppCompatActivity {
 
-    private TextView mFirstName;
-    private TextView mLastName;
-    private TextView mPhone;
-    private TextView mCountry;
+    private TextView firstName;
+    private TextView lastName;
+    private TextView phone;
+    private TextView country;
     private DatabaseReference dbUsers;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private Button buttonAddDetails;
-    private String idUser;
+    private String currentUserId;
     private static final String TAG = "UserDetails";
 
     @Override
@@ -38,10 +38,10 @@ public class UserDetails extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         dbUsers = FirebaseDatabase.getInstance().getReference("users");
-        mFirstName = (TextView) findViewById(R.id.firstnameD);
-        mLastName = (TextView)findViewById(R.id.lastnameD);
-        mPhone = (TextView) findViewById(R.id.phoneD);
-        mCountry = (TextView) findViewById(R.id.countryD);
+        firstName = (TextView) findViewById(R.id.firstnameD);
+        lastName = (TextView)findViewById(R.id.lastnameD);
+        phone = (TextView) findViewById(R.id.phoneD);
+        country = (TextView) findViewById(R.id.countryD);
         buttonAddDetails = (Button) findViewById(R.id.addDataD);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -51,7 +51,7 @@ public class UserDetails extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    idUser=user.getUid();
+                    currentUserId = user.getUid();
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -70,10 +70,10 @@ public class UserDetails extends AppCompatActivity {
 
     public void addUserData() {
 
-        String firstName = mFirstName.getText().toString().trim();
-        String lastName = mLastName.getText().toString().trim();
-        String phone = mPhone.getText().toString().trim();
-        String country = mCountry.getText().toString().trim();
+        String firstName = this.firstName.getText().toString().trim();
+        String lastName = this.lastName.getText().toString().trim();
+        String phone = this.phone.getText().toString().trim();
+        String country = this.country.getText().toString().trim();
 
         // validate inputs and then create the UserData object to hold the data
 
@@ -102,7 +102,7 @@ public class UserDetails extends AppCompatActivity {
         }
 
         UserData userInformation = new UserData(firstName, lastName, phone, country);
-        dbUsers.child(idUser).setValue(userInformation);
+        dbUsers.child(currentUserId).setValue(userInformation);
         startActivity(new Intent(getApplicationContext(), QuestionActivity.class));
     }
 

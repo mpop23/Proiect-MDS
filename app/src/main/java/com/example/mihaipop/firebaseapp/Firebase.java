@@ -29,12 +29,9 @@ public class Firebase extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String idUser;
-    private Context context;
     private static final String TAG = "Firebase";
 
     Firebase(Context context) {
-
-        this.context = context;
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         dbUsers = FirebaseDatabase.getInstance().getReference("users");
@@ -46,13 +43,13 @@ public class Firebase extends AppCompatActivity {
 
     public String getIdUser() { return idUser; }
 
-    public void  snapShot(final CheckedTextView description, final TextView noFriends, final TextView noQuestion) {
+    public void setDetailsForCurrentUser(final CheckedTextView description, final TextView nrFriends, final TextView nrQuestions) {
 
         dbUsers.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void  onDataChange(DataSnapshot dataSnapshot) {
-                showDecription(dataSnapshot, description, noFriends, noQuestion);
+                showDecription(dataSnapshot, description, nrFriends, nrQuestions);
             }
 
             @Override
@@ -108,7 +105,7 @@ public class Firebase extends AppCompatActivity {
 
 
 
-    public void showDecription(DataSnapshot dataSnapshot, CheckedTextView description, TextView noFriends, TextView noQuestion) {
+    public void showDecription(DataSnapshot dataSnapshot, CheckedTextView description, TextView nrFriends, TextView nrQuestions) {
 
         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
             //get data
@@ -117,11 +114,11 @@ public class Firebase extends AppCompatActivity {
 
             if (!id.equals(idUser)) {
                 User.setDescription(postSnapshot.getValue(UserData.class).getDescription());
-                User.setNoFriends(postSnapshot.getValue(UserData.class).getNoFriends());
-                User.setNoQuestion(postSnapshot.getValue(UserData.class).getNoQuestion());
+                User.setNrFriends(postSnapshot.getValue(UserData.class).getNrFriends());
+                User.setNrQuestion(postSnapshot.getValue(UserData.class).getNrQuestion());
                 description.setText(User.getDescription());
-                noFriends.setText("" + User.getNoFriends());
-                noQuestion.setText(("" + User.getNoQuestion()));
+                nrFriends.setText("" + User.getNrFriends());
+                nrQuestions.setText(("" + User.getNrQuestion()));
             }
         }
     }
@@ -195,12 +192,6 @@ public class Firebase extends AppCompatActivity {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
-    }
-
-    public void toast(String text){
-
-        Toast mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-        mToast.show();
     }
 
     /*

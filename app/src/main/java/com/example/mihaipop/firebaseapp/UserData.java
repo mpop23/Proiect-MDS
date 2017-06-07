@@ -1,5 +1,8 @@
 package com.example.mihaipop.firebaseapp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by mihaipop on 06/05/2017.
  * CHANGES: Changed name to a better one.
@@ -13,8 +16,18 @@ public  class UserData {
     private String country;
     private String privat;
     private String description;
-    private int noFriends;
-    private int noQuestion;
+    private List<String> friends;
+
+
+    /**
+     * the prefix 'no' has been replaced with the prefix 'nr' for
+     * minimizing the confusion with the logical "no" for negation
+     * when you see 'noFriends' you think 'no Friends' meaning
+     * not a single friend. 'nrFriend' it is more clear that refers to
+     * 'number of friends'
+     */
+    private int nrFriends;
+    private int nrQuestion;
 
     public UserData(){}
 
@@ -25,8 +38,9 @@ public  class UserData {
         this.country = country;
         privat = "Nu";
         description = "";
-        noFriends = 0;
-        noQuestion = 0;
+        nrFriends = 0;
+        nrQuestion = 0;
+        friends = new ArrayList<>();
     }
 
     public String getFirstName() {
@@ -53,20 +67,20 @@ public  class UserData {
         return description;
     }
 
-    public int getNoFriends() {
-        return noFriends;
+    public int getNrFriends() {
+        return nrFriends;
     }
 
-    public int getNoQuestion() {
-        return noQuestion;
+    public int getNrQuestion() {
+        return nrQuestion;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public void setNoFriends(int noFriends) {
-        this.noFriends = noFriends;
+    public void setNrFriends(int nrFriends) {
+        this.nrFriends = nrFriends;
     }
 
     public void setPrivat(String privat) {
@@ -74,8 +88,8 @@ public  class UserData {
         this.privat = privat;
     }
 
-    public void setNoQuestion(int noQuestion) {
-        this.noQuestion = noQuestion;
+    public void setNrQuestion(int nrQuestion) {
+        this.nrQuestion = nrQuestion;
     }
 
     public void setLastName(String lastName) {
@@ -94,4 +108,11 @@ public  class UserData {
         this.description = description;
     }
 
+    public List<String> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<String> friends) {
+        this.friends = friends;
+    }
 }

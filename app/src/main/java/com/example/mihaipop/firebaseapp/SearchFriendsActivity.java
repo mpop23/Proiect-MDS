@@ -83,8 +83,8 @@ public class SearchFriendsActivity extends android.app.Activity {
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String myId=mFirebase.getIdUser();
-                        String friendId=users.get(i).getFirst();
+                        String myId = mFirebase.getIdUser();
+                        String friendId = users.get(i).getFirst();
 
                         Intent myIntent = new Intent(getApplicationContext(),FriendAccountActivity.class);
                         myIntent.putExtra("myId",myId);

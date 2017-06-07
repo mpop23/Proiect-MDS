@@ -1,13 +1,7 @@
 package com.example.mihaipop.firebaseapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,30 +10,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.storage.StorageReference;
-
-import java.util.ArrayList;
 /**
  * Created by mihaipop
  */
 public class UserAccount extends AppCompatActivity
-
-    implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private Firebase mFirebase;
     private ImageView pPhoto;
     private CheckedTextView description;
-    private TextView noFriends;
-    private TextView noQuestion;
+    private TextView nrFriends;
+    private TextView nrQuestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +35,8 @@ public class UserAccount extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         description = (CheckedTextView)findViewById(R.id.description);
-        noFriends = (TextView)findViewById(R.id.friends);
-        noQuestion = (TextView)findViewById(R.id.ques);
+        nrFriends = (TextView)findViewById(R.id.friends);
+        nrQuestions = (TextView)findViewById(R.id.ques);
         pPhoto = (ImageView)findViewById(R.id.profilephoto);
         mFirebase = new Firebase(getApplicationContext());
 
@@ -58,12 +44,17 @@ public class UserAccount extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        //TODO: use another method that does the same thing and it is not deprecated
         drawer.setDrawerListener(toggle);
+
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        mFirebase.snapShot(description, noFriends, noQuestion);
+
+
+        mFirebase.setDetailsForCurrentUser(description, nrFriends, nrQuestions);
     }
 
     @Override
@@ -104,11 +95,15 @@ public class UserAccount extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_slideshow) {
+        if (id == R.id.nav_logout) {
                 mFirebase.signOut();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
         } else if (id == R.id.nav_manage) {
             startActivity(new Intent(getApplicationContext(), AccountInfoActivity.class));
+        } else if (id == R.id.nav_inbox) {
+            startActivity(new Intent(getApplicationContext(), InboxActivity.class));
+        } else if (id == R.id.nav_friends) {
+            startActivity(new Intent(getApplicationContext(), FriendsListActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
