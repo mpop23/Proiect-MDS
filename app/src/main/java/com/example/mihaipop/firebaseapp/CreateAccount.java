@@ -52,12 +52,12 @@ public class CreateAccount extends AppCompatActivity {
         boolean ok = true;
         boolean create = false;
 
-        if ((!Validation.validString(user_name)) || (!Validation.validString(password))){
+        if ((!Validation.getInstance().validString(user_name)) || (!Validation.getInstance().validString(password))){
             toast("Completează toate câmpurile.");
             ok = false;
         }
 
-        if (!Validation.validPassword(password)){
+        if (!Validation.getInstance().validPassword(password)){
             toast("Parola trebuie să conţină cel puţin 6 caractere, numere şi litere.");
             ok = false;
         }

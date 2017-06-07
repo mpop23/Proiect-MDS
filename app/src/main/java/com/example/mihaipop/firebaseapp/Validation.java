@@ -4,17 +4,25 @@ package com.example.mihaipop.firebaseapp;
  * Created by mihaipop on 27/05/2017.
  */
 
-public final class Validation {
+public class Validation {
+    private static Validation instance;
 
     private Validation() {}
 
-    public static boolean validString(String string) {
+    public static Validation getInstance() {
+        if (instance == null)
+            instance = new Validation();
+
+        return instance;
+    }
+
+    public  boolean validString(String string) {
         if(string.equals(""))
             return false;
         return true;
     }
 
-    public static boolean validName(String name){
+    public  boolean validName(String name){
 
         boolean ok = true;
         name = name.toLowerCase();
@@ -27,7 +35,7 @@ public final class Validation {
         return ok;
     }
 
-    public static boolean validUser(String user) {
+    public  boolean validUser(String user) {
         boolean ok = false;
 
         for (int i = 0 ; i < user.length(); i++) {
@@ -38,7 +46,7 @@ public final class Validation {
         return ok;
     }
 
-    public static boolean validPhone(String phone) {
+    public  boolean validPhone(String phone) {
         boolean ok = true;
 
         for(int i = 0; i < phone.length(); i++) {
@@ -49,7 +57,7 @@ public final class Validation {
         return ok;
     }
 
-    public static boolean validPassword(String password) {
+    public  boolean validPassword(String password) {
 
         if (password.length() < 6)
             return false;
@@ -70,7 +78,7 @@ public final class Validation {
     }
 
 
-    public static boolean validData(String firstName, String lastName, String phone, String country){
+    public  boolean validData(String firstName, String lastName, String phone, String country){
 
         boolean ok = true;
 

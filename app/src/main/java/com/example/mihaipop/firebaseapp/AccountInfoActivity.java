@@ -41,7 +41,7 @@ public class AccountInfoActivity extends AppCompatActivity {
                 description = (TextView)findViewById(R.id.changeDescription);
                 String changeDescription = description.getText().toString();
 
-                if(Validation.validString(changeDescription)) {
+                if(Validation.getInstance().validString(changeDescription)) {
                     mFirebase.changeDescription(changeDescription);
                     Util.showMessage(getApplicationContext(), "Descrierea a fost schimbată.");
                 }

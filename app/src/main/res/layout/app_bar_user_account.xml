@@ -25,7 +25,7 @@
     <include
         layout="@layout/content_user_account"
         android:layout_width="match_parent"
-        android:layout_height="618dp"
+        android:layout_height="562dp"
         android:visibility="visible" />
 
 </android.support.design.widget.CoordinatorLayout>
