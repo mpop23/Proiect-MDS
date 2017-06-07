@@ -1,9 +1,5 @@
 package com.example.mihaipop.firebaseapp;
 
-/**
- * Created by Gabriel on 05.06.2017.
- */
-
 import android.content.Context;
 import android.widget.Toast;
 
