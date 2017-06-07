@@ -1,0 +1,21 @@
+Barem de notare laborator MDS 2017
+Existã douã componente principale cu pondere egalã la notã:
+
+A. Implementarea -  notã între 1 ?i 10
+Live demo pentru aplica?ie
+
+B. Procesul de dezvoltare software - notã între 1 ?i 10
+Aceasta constã din urmãtoarele pãr?i:
+-user stories (minim 10), backlog creation - 2 pct
+-design/arhitectura/UML - 2 pct
+-source control (branch creation, merge/rebase, minim 10 commits) - 2 pct
+-teste automate (unit sau integration) - minim 5 - 3 pct
+-bug reporting - 1 pct
+-folosirea unui build tool - 1 pct
+-refactoring (minim 1), code standards - 1 pct
+-design patterns (minim 2) - 1 pct
+
+(Nu este o gre?eala cã la B suma punctelor este 13, nu 10. În acest fel pute?i alege ce subpuncte realiza?i pentru a ob?ine nota 10.)
+
+Nota finalã la laborator este media aritmeticã a notelor de la A ?i B:
+round((A+B)/2)
