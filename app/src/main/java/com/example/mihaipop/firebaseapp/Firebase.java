@@ -112,7 +112,7 @@ public class Firebase extends AppCompatActivity {
             String id = postSnapshot.getKey();
             UserData User = new UserData();
 
-            if (!id.equals(idUser)) {
+            if (id.equals(idUser)) {
                 User.setDescription(postSnapshot.getValue(UserData.class).getDescription());
                 User.setNrFriends(postSnapshot.getValue(UserData.class).getNrFriends());
                 User.setNrQuestion(postSnapshot.getValue(UserData.class).getNrQuestion());
