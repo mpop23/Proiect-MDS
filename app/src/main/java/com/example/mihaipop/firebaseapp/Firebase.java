@@ -103,7 +103,23 @@ public class Firebase extends AppCompatActivity {
     }
 
 
+    public void  snapShot(final String friendId ,  final FriendAccountActivity info ) {
 
+
+        dbUsers.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void  onDataChange(DataSnapshot dataSnapshot) {
+
+                info.test(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+    }
 
     public void showDecription(DataSnapshot dataSnapshot, CheckedTextView description, TextView nrFriends, TextView nrQuestions) {
 
